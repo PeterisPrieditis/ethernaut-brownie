@@ -18,13 +18,6 @@ LOCAL_BLOCKCHAIN_ENVIRONMENTS = NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS + [
     "matic-fork",
 ]
 
-# ABI is stored here to reduce size of helpful_scripts.py
-# We can get ABI in console by typing -> JSON.stringify(ethernaut.abi)
-ethernaut_abi_file = open(
-    "./interfaces/ethernaut_abi.json",
-)
-ETHERNAUT_ABI = json.load(ethernaut_abi_file)
-
 
 def get_account(index=None, id=None):
     if index:
@@ -41,8 +34,8 @@ def get_new_instance(level_contract_name="00_hello_ethernaut"):
     print("===--- Get new instance for level - " + level_contract_name)
     level_contract_address = config["levels"][level_contract_name]
     account = get_account()
-    ethernaut_contract = Contract.from_abi(
-        "ethernaut", ETHERNAUT_ADDRESS, ETHERNAUT_ABI
+    ethernaut_contract = get_contract_from_abi_json(
+        "Ethernaut", ETHERNAUT_ADDRESS, "ethernaut_abi.json"
     )
     tx = ethernaut_contract.createLevelInstance(
         level_contract_address, {"from": account}
@@ -53,7 +46,37 @@ def get_new_instance(level_contract_name="00_hello_ethernaut"):
     event_items = tx.events["LevelInstanceCreatedLog"].items()
     instance_event = [event for event in event_items if event[0] == "instance"]
     instance_address = instance_event[0][1]
+    print("===--- Instance for level address - " + instance_address)
     return instance_address
+
+
+# ABI is stored here to reduce size of helpful_scripts.py
+# We can get ABI in console by typing -> JSON.stringify(ethernaut.abi) or JSON.stringify(contract.abi)
+def get_contract_from_abi_json(contract_name, address, file_name):
+    file = open(
+        "./interfaces/" + file_name,
+    )
+    abi_json = json.load(file)
+    contract = Contract.from_abi(contract_name, address, abi_json)
+    return contract
+
+
+def submit_instance(level_contract_address):
+    print("===--- Submit instance for level address - " + level_contract_address)
+    account = get_account()
+    ethernaut_contract = get_contract_from_abi_json(
+        "Ethernaut", ETHERNAUT_ADDRESS, "ethernaut_abi.json"
+    )
+    tx = ethernaut_contract.submitLevelInstance(
+        level_contract_address, {"from": account}
+    )
+    tx.wait(1)
+    # There will be an error if LevelCompletedLog event did occure
+    try:
+        event_items = tx.events["LevelCompletedLog"].items()
+    except:
+        return False
+    return True
 
 
 # brownie run scripts/helpful_scripts.py --network rinkeby-fork
