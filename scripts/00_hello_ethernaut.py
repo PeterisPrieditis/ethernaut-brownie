@@ -35,8 +35,8 @@ def main():
     password = level_contract.password()
     print("level_contract.password() -> " + password)
     print()
-    # tx = level_contract.authenticate(password, {"from": account})
-    # tx.wait(1)
+    tx = level_contract.authenticate(password, {"from": account})
+    tx.wait(1)
     level_solved = submit_instance(level_contract.address)
     if level_solved:
         print("You have completed level -> " + LEVEL_NAME)
