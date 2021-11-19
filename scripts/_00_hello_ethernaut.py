@@ -1,6 +1,3 @@
-from brownie.network.web3 import web3
-import json
-
 from scripts.helpful_scripts import (
     get_account,
     get_new_instance,
@@ -9,15 +6,33 @@ from scripts.helpful_scripts import (
 )
 
 LEVEL_NAME = "00_hello_ethernaut"
+ABI_JSON_FILE_NAME = "lvl_00_hello_ethernaut_abi.json"
 
-# brownie run scripts/00_hello_ethernaut.py --network rinkeby-fork
-def main():
-    account = get_account()
-    abi_json_file_name = "lvl_00_hello_ethernaut_abi.json"
+
+def get_level_contract():
     instance_address = get_new_instance(LEVEL_NAME)
     level_contract = get_contract_from_abi_json(
-        "Instance", instance_address, abi_json_file_name
+        "Instance", instance_address, ABI_JSON_FILE_NAME
     )
+    return level_contract
+
+
+def solve_level(level_contract):
+    password = level_contract.password()
+    tx = level_contract.authenticate(password, {"from": get_account()})
+    tx.wait(1)
+
+
+def test_level():
+    level_contract = get_level_contract()
+    solve_level(level_contract)
+    level_solved = submit_instance(level_contract.address)
+    return level_solved
+
+
+# brownie run scripts/_00_hello_ethernaut.py --network rinkeby-fork
+def main():
+    level_contract = get_level_contract()
     # Contract info() function creates Namespace collision. Created stackoverflow question.
     # https://stackoverflow.com/questions/70021317/brownie-classmethod-contract-from-abi-creates-namespace-error-for-info-funct
     #
@@ -32,15 +47,11 @@ def main():
     print("level_contract.info42() -> " + level_contract.info42())
     print("level_contract.theMethodName() -> " + level_contract.theMethodName())
     print("level_contract.method7123949() -> " + level_contract.method7123949())
-    password = level_contract.password()
-    print("level_contract.password() -> " + password)
+    print("level_contract.password() -> " + level_contract.password())
     print()
-    tx = level_contract.authenticate(password, {"from": account})
-    tx.wait(1)
+    solve_level(level_contract)
     level_solved = submit_instance(level_contract.address)
     if level_solved:
         print("You have completed level -> " + LEVEL_NAME)
     else:
-        print(
-            f"\(°□°)/ Oops! Looks like you haven't cracked level {LEVEL_NAME} just yet \(°□°)/"
-        )
+        print(f"Looks like you haven't cracked level {LEVEL_NAME} just yet!")

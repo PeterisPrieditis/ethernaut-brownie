@@ -31,7 +31,7 @@ def get_account(index=None, id=None):
 
 # brownie run scripts/helpful_scripts.py --network rinkeby-fork
 def get_new_instance(level_contract_name="00_hello_ethernaut"):
-    print("===--- Get new instance for level - " + level_contract_name)
+    # print("===--- Get new instance for level - " + level_contract_name)
     level_contract_address = config["levels"][level_contract_name]
     account = get_account()
     ethernaut_contract = get_contract_from_abi_json(
@@ -46,7 +46,7 @@ def get_new_instance(level_contract_name="00_hello_ethernaut"):
     event_items = tx.events["LevelInstanceCreatedLog"].items()
     instance_event = [event for event in event_items if event[0] == "instance"]
     instance_address = instance_event[0][1]
-    print("===--- Instance for level address - " + instance_address)
+    # print("===--- Instance for level address - " + instance_address)
     return instance_address
 
 
@@ -62,7 +62,7 @@ def get_contract_from_abi_json(contract_name, address, file_name):
 
 
 def submit_instance(level_contract_address):
-    print("===--- Submit instance for level address - " + level_contract_address)
+    # print("===--- Submit instance for level address - " + level_contract_address)
     account = get_account()
     ethernaut_contract = get_contract_from_abi_json(
         "Ethernaut", ETHERNAUT_ADDRESS, "ethernaut_abi.json"
