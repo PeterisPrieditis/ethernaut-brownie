@@ -4,7 +4,7 @@ This is introduction chalange in order to get familiar how to play the game.
 
 ## Solution in console
 
-During the game it is necessary to write in console:
+To solve challange in browser console it is necessary to write:
 ```bash
     await contract.info()
     await contract.info1()
@@ -17,6 +17,11 @@ During the game it is necessary to write in console:
 ```
 
 ## Solution in Brownie
+
+Solution uses abi file from interface folder and not solidity code because at start of challange solidity code is not yet visible. We can get abi from console with:
+```bash
+JSON.stringify(ethernaut.abi)
+```
 
 To solve chalange in Brownie:
 ```bash
