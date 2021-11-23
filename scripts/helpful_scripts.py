@@ -61,6 +61,14 @@ def get_contract_from_abi_json(contract_name, address, file_name):
     return contract
 
 
+def get_level_contract(level_name, interface_contract):
+    instance_address = get_new_instance(level_name)
+    level_contract = Contract.from_abi(
+        interface_contract._name, instance_address, interface_contract.abi
+    )
+    return level_contract
+
+
 def submit_instance(level_contract_address):
     # print("===--- Submit instance for level address - " + level_contract_address)
     account = get_account()
@@ -78,6 +86,13 @@ def submit_instance(level_contract_address):
     except:
         return False
     return True
+
+
+def print_out_if_level_solved(level_solved, level_name):
+    if level_solved:
+        print("You have completed level -> " + level_name)
+    else:
+        print(f"Looks like you haven't cracked level {level_name} just yet!")
 
 
 # brownie run scripts/helpful_scripts.py --network rinkeby-fork

@@ -1,3 +1,11 @@
+# configuration settings
+
+# Started to use 10 Gwei as priority fee because of Rinkeby congestion
+# https://eth-brownie.readthedocs.io/en/stable/config.html
+
+networks:
+    live:
+        priority_fee: 10000000000
 dependencies:
   - OpenZeppelin/openzeppelin-contracts@3.0.0
 compiler:
@@ -10,3 +18,6 @@ wallets:
 levels:
   00_hello_ethernaut: '0x4E73b858fD5D7A5fc1c3455061dE52a53F35d966'
   01_fallback: '0x9CB391dbcD447E645D6Cb55dE6ca23164130D008'
+  02_fallout: '0x5732B2F88cbd19B6f01E3a96e9f0D90B917281E5'
+  03_coin_flip: '0x4dF32584890A0026e56f7535d0f2C6486753624f'
+  04_telephone: '0x0b6F6CE4BCfB70525A31454292017F640C10c768'

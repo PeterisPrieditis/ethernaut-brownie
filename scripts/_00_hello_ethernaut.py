@@ -25,6 +25,8 @@ def solve_level(level_contract):
 
 # brownie run scripts/_00_hello_ethernaut.py --network rinkeby-fork
 def main():
+    # account = get_account()
+    # print("Balance -> " + str(account.balance()))
     level_contract = get_level_contract()
     # Contract info() function creates Namespace collision. Created stackoverflow question.
     # https://stackoverflow.com/questions/70021317/brownie-classmethod-contract-from-abi-creates-namespace-error-for-info-funct

