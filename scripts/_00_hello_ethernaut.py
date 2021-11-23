@@ -1,12 +1,12 @@
+LEVEL_NAME = "00_hello_ethernaut"
+ABI_JSON_FILE_NAME = "lvl_00_hello_ethernaut_abi.json"
+
 from scripts.helpful_scripts import (
     get_account,
     get_new_instance,
     submit_instance,
     get_contract_from_abi_json,
 )
-
-LEVEL_NAME = "00_hello_ethernaut"
-ABI_JSON_FILE_NAME = "lvl_00_hello_ethernaut_abi.json"
 
 
 def get_level_contract():
@@ -21,13 +21,6 @@ def solve_level(level_contract):
     password = level_contract.password()
     tx = level_contract.authenticate(password, {"from": get_account()})
     tx.wait(1)
-
-
-def test_level():
-    level_contract = get_level_contract()
-    solve_level(level_contract)
-    level_solved = submit_instance(level_contract.address)
-    return level_solved
 
 
 # brownie run scripts/_00_hello_ethernaut.py --network rinkeby-fork
@@ -55,3 +48,4 @@ def main():
         print("You have completed level -> " + LEVEL_NAME)
     else:
         print(f"Looks like you haven't cracked level {LEVEL_NAME} just yet!")
+    return level_solved

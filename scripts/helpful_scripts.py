@@ -70,6 +70,7 @@ def submit_instance(level_contract_address):
     tx = ethernaut_contract.submitLevelInstance(
         level_contract_address, {"from": account}
     )
+    # print(tx.info())
     tx.wait(1)
     # There will be an error if LevelCompletedLog event did occure
     try:
