@@ -25,7 +25,7 @@ def solve_level(level_contract):
         #   This transaction will likely revert. If you wish to broadcast, include `allow_revert:True` as a transaction parameter.
         tx = coin_flip_attack.flipAttack(
             level_contract.address,
-            {"from": account, "allow_revert": True, "gas_limit": 10000000},
+            {"from": account, "allow_revert": True, "gas_limit": 1000000},
         )
         tx.wait(1)
         consecutiveWins = level_contract.consecutiveWins()

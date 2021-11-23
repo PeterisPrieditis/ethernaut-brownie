@@ -19,14 +19,10 @@ LOCAL_BLOCKCHAIN_ENVIRONMENTS = NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS + [
 ]
 
 
-def get_account(index=None, id=None):
-    if index:
-        return accounts[index]
+def get_account(id=0):
     if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
-        return accounts[0]
-    if id:
-        return accounts.load(id)
-    return accounts.add(config["wallets"]["from_key"])
+        return accounts[id]
+    return accounts.add(config["wallets"]["from_key_" + str(id)])
 
 
 # brownie run scripts/helpful_scripts.py --network rinkeby-fork
