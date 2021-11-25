@@ -4,6 +4,7 @@ from scripts._02_fallout import main as test_02
 from scripts._03_coin_flip import main as test_03
 from scripts._04_telephone import main as test_04
 from scripts._05_token import main as test_05
+from scripts._06_delegation import main as test_06
 
 # brownie test --network rinkeby-fork -s
 # brownie test --network rinkeby -s
@@ -41,4 +42,10 @@ def test_04_telephone():
 # brownie test -k test_05_token --network rinkeby-fork -s
 def test_05_token():
     level_completed = test_05()
+    assert level_completed is True
+
+
+# brownie test -k test_06_delegation --network rinkeby-fork -s
+def test_06_delegation():
+    level_completed = test_06()
     assert level_completed is True
