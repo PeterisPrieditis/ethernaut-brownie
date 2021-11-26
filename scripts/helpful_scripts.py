@@ -8,7 +8,8 @@ from brownie import (
 )
 
 # main game contract address - ethernaut.address
-ETHERNAUT_ADDRESS = "0xD991431D8b033ddCb84dAD257f4821E9d5b38C33"
+# ETHERNAUT_ADDRESS = "0xD991431D8b033ddCb84dAD257f4821E9d5b38C33"
+ETHERNAUT_ADDRESS = config["levels"]["ethernaut_address"]
 
 NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["hardhat", "development", "ganache"]
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS + [
@@ -26,7 +27,7 @@ def get_account(id=0):
 
 
 # brownie run scripts/helpful_scripts.py --network rinkeby-fork
-def get_new_instance(level_contract_name="00_hello_ethernaut"):
+def get_new_instance(level_contract_name="00_hello_ethernaut", instance_value_wei=0):
     # print("===--- Get new instance for level - " + level_contract_name)
     level_contract_address = config["levels"][level_contract_name]
     account = get_account()
@@ -34,7 +35,7 @@ def get_new_instance(level_contract_name="00_hello_ethernaut"):
         "Ethernaut", ETHERNAUT_ADDRESS, "ethernaut_abi.json"
     )
     tx = ethernaut_contract.createLevelInstance(
-        level_contract_address, {"from": account}
+        level_contract_address, {"from": account, "value": instance_value_wei}
     )
     tx.wait(1)
     # event_items should receive
@@ -57,8 +58,8 @@ def get_contract_from_abi_json(contract_name, address, file_name):
     return contract
 
 
-def get_level_contract(level_name, interface_contract):
-    instance_address = get_new_instance(level_name)
+def get_level_contract(level_name, interface_contract, instance_value_wei=0):
+    instance_address = get_new_instance(level_name, instance_value_wei)
     level_contract = Contract.from_abi(
         interface_contract._name, instance_address, interface_contract.abi
     )

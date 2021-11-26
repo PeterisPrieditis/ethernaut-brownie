@@ -7,8 +7,6 @@ from scripts.helpful_scripts import (
     print_out_if_level_solved,
 )
 
-from eth_utils import function_signature_to_4byte_selector
-
 LEVEL_NAME = "07_force"
 INTERFACE_CONTRACT = Force
 
@@ -18,6 +16,9 @@ def solve_level(level_contract):
     force_attack = ForceAttack.deploy({"from": account})
     tx = force_attack.attack(level_contract.address, {"from": account, "value": 1})
     tx.wait(1)
+    # Removes a contract instance from the container otherwise next time brownnie would have an below error
+    #   ContractNotFound(f"No contract deployed at {address}")
+    ForceAttack.remove(force_attack)
 
 
 # brownie run scripts/_07_force.py --network rinkeby-fork
