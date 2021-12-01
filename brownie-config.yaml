@@ -3,6 +3,7 @@
 # Started to use 10 Gwei as priority fee because of Rinkeby congestion
 # https://eth-brownie.readthedocs.io/en/stable/config.html
 
+
 networks:
     live:
         priority_fee: 10000000000
@@ -32,3 +33,8 @@ levels:
   11_elevator:    '0xab4f3f2644060b2d960b0d88f0a42d1d27484687'
   12_privacy:        '0x11343d543778213221516d004ed82c45c3c8788b'
   13_gatekeeper_one: '0x9b261b23ce149422de75907c6ac0c30cec4e652a'
+  14_gatekeeper_two: '0xdcea38b2ce1768e1f409b6c65344e81f16bec38d'
+  15_naught_coin:    '0x096bb5e93a204bfd701502eb6ef266a950217218'
+  16_preservation:   '0x97e982a15fbb1c28f6b8ee971bec15c78b3d263f'
+  17_recovery:       '0x1a1742c8912691c6154d1ad3de0650579f58fc44'
+  18_magic_number:   '0x200d3d9ac7bfd556057224e7aeb4161fed5608d0'

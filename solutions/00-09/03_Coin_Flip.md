@@ -69,3 +69,43 @@ var slot_5 = await web3.eth.getStorageAt(contract.address, 5)
 await contract.unlock(slot_5.slice(0, 34))
 });
 ```
+
+# 13 Gatekeeper One
+
+It is necessary to pass three modifier checks:
+1) Requires msg.sender != tx.origin so transaction must go through smart contract.
+2) Remaining gas must have specific amount.
+3) It is neccessary to find _gateKey:
+require(uint32(uint64(_gateKey)) == uint16(tx.origin)
+=> says that _gateKey bytes #5,6 must be 00 and #7,8 will be last bytes from tx.origin
+require(uint32(uint64(_gateKey)) == uint16(uint64(_gateKey))
+=> says that _gateKey bytes #5,6 must be 00
+require(uint32(uint64(_gateKey)) != uint64(_gateKey)
+=> says that bytes #1-4 must have something filled somewhere
+
+# 14 Gatekeeper Two
+
+It is necessary to pass three modifier checks:
+1) Requires msg.sender != tx.origin so transaction must go through smart contract.
+2) Transaction must be forwarded through constructor because: During initialization code execution, EXTCODESIZE on the address should return zero, which is the length of the code of the account while CODESIZE should return the length of the initialization code.
+3) It is neccessary to find _gateKey. To find the _gateKey it is necessary to know Bitwise Operations
+A xor B = C
+A xor C = B
+
+# 15 Naught Coin
+
+ERC20 Spec has two functions for token transfer and Naught Coin has implementation only for one of them. Naught Coin has implementation only for function transfer however it is still possible to transfer tokens with function transferFrom.
+
+# 16 Preservation
+
+It is necessary to exploit a contract by calling a delegatecall function. Solution of level 6, 8 and 12 will help to solve this chalange. LibraryContract modifies the state at slot 0. We can set attacker contract address with first setFirstTime call and with second call we will invoke attacker contract.
+
+# 17 Recovery
+
+Contract was created by a factory contract. We have access to the factory contract however child contract address is unknown. It is necessary to find child contract address and call destroy function.
+
+Contract addresses are deterministic and are calculated by keccack256(address, nonce) where the address is the address of the contract (or ethereum address that created the transaction) and nonce is the number of contracts the spawning contract has created (or the transaction nonce, for regular transactions). There is a second way how to create contracts by using CREATE2 which generates a different address but this factory contract uses the standard one. 
+
+# 18 MagicNumber
+
+It is necessary to deploy a contract that returns 42 and contract can't be larger than 10 opcodes. Here is a explanation [how to get necessary opcodes](https://medium.com/coinmonks/ethernaut-lvl-19-magicnumber-walkthrough-how-to-deploy-contracts-using-raw-assembly-opcodes-c50edb0f71a2) 

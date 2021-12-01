@@ -14,6 +14,7 @@ contract GatekeeperOne {
 
     modifier gateTwo() {
         require(gasleft().mod(8191) == 0);
+
         _;
     }
 

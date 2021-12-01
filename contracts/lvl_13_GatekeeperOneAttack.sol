@@ -26,15 +26,11 @@ contract GatekeeperOneAttack {
         _;
     }
 
-    function testGateThree(bytes8 _gateKey)
-        public
-        gateThree(_gateKey)
-        returns (bool)
-    {
-        return true;
+    function testGateThree(address _address) public {
+        GatekeeperOne gate = GatekeeperOne(_address);
     }
 
-    function attack(bytes8 _gateKey, uint256 _gasToUse) public {
-        bool success = levelContract.enter{gas: _gasToUse}(_gateKey);
+    function attack(bytes8 _gateKey) public {
+        levelContract.enter(_gateKey);
     }
 }

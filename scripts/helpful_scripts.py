@@ -72,8 +72,9 @@ def submit_instance(level_contract_address):
     ethernaut_contract = get_contract_from_abi_json(
         "Ethernaut", ETHERNAUT_ADDRESS, "ethernaut_abi.json"
     )
+    # Added "Gas limit" because of level 18
     tx = ethernaut_contract.submitLevelInstance(
-        level_contract_address, {"from": account}
+        level_contract_address, {"from": account, "allow_revert": True, "gas": 500000}
     )
     # print(tx.info())
     tx.wait(1)

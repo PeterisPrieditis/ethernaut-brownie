@@ -2,6 +2,10 @@
 
 This is a repo with solutions in [Brownie](https://eth-brownie.readthedocs.io/en/stable/) to [Ethernaut CTF](https://ethernaut.openzeppelin.com/). In-depth explanations for each level are visible [solutions](https://github.com/PeterisPrieditis/ethernaut-brownie/tree/master/solutions) folder. A great list with solutions from other people can be found at [Ethernaut Community Solutions](https://forum.openzeppelin.com/t/ethernaut-community-solutions/561).
 
+I was using:
+https://cmichel.io/ethernaut-solutions/
+https://forum.openzeppelin.com/t/ethernaut-community-solutions/561#nicole-zhu-series-3
+
 ## Prerequisites
 
 Please install or have installed the following:

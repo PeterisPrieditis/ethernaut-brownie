@@ -11,6 +11,12 @@ from scripts._09_king import main as test_09
 from scripts._10_re_entrancy import main as test_10
 from scripts._11_elevator import main as test_11
 from scripts._12_privacy import main as test_12
+from scripts._13_gatekeeper_one import main as test_13
+from scripts._14_gatekeeper_two import main as test_14
+from scripts._15_naught_coin import main as test_15
+from scripts._16_preservation import main as test_16
+from scripts._17_recovery import main as test_17
+from scripts._18_magic_number import main as test_18
 
 # brownie test --network rinkeby-fork -s
 # brownie test --network rinkeby -s
@@ -90,4 +96,40 @@ def test_11_elevator():
 # brownie test -k test_12_privacy --network rinkeby-fork -s
 def test_12_privacy():
     level_completed = test_12()
+    assert level_completed is True
+
+
+# brownie test -k test_13_gatekeeper_one --network rinkeby-fork -s
+def test_13_gatekeeper_one():
+    level_completed = test_13()
+    assert level_completed is True
+
+
+# brownie test -k test_14_gatekeeper_two --network rinkeby-fork -s
+def test_14_gatekeeper_two():
+    level_completed = test_14()
+    assert level_completed is True
+
+
+# brownie test -k test_15_naught_coin --network rinkeby-fork -s
+def test_15_naught_coin():
+    level_completed = test_15()
+    assert level_completed is True
+
+
+# brownie test -k test_16_preservation --network rinkeby-fork -s
+def test_16_preservation():
+    level_completed = test_16()
+    assert level_completed is True
+
+
+# brownie test -k test_17_recovery --network rinkeby-fork -s
+def test_17_recovery():
+    level_completed = test_17()
+    assert level_completed is True
+
+
+# brownie test -k test_18_magic_number --network rinkeby-fork -s
+def test_18_magic_number():
+    level_completed = test_18()
     assert level_completed is True
