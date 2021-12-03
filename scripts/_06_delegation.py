@@ -26,7 +26,7 @@ def solve_level(level_contract):
     """
     # ------------
     # here is a good example on how to use encode_abi()
-    #   https://github.com/AndyJiangIsTaken/multicall/blob/b12d68e158b751d68c57484a4e5c2f215828865a/tests/test_signature.pyHere
+    #   https://github.com/AndyJiangIsTaken/multicall/blob/b12d68e158b751d68c57484a4e5c2f215828865a/tests/test_signature.py
     four_byte_signature = "0x" + function_signature_to_4byte_selector("pwn()").hex()
     # four_byte_signature has value "0xdd365b8b"
     tx = account.transfer(to=level_contract, data=four_byte_signature)

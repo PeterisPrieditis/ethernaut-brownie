@@ -108,4 +108,33 @@ Contract addresses are deterministic and are calculated by keccack256(address, n
 
 # 18 MagicNumber
 
-It is necessary to deploy a contract that returns 42 and contract can't be larger than 10 opcodes. Here is a explanation [how to get necessary opcodes](https://medium.com/coinmonks/ethernaut-lvl-19-magicnumber-walkthrough-how-to-deploy-contracts-using-raw-assembly-opcodes-c50edb0f71a2) 
+It is necessary to deploy a contract that returns 42 and contract can't be larger than 10 opcodes. Here is an explanation [how to get necessary opcodes](https://medium.com/coinmonks/ethernaut-lvl-19-magicnumber-walkthrough-how-to-deploy-contracts-using-raw-assembly-opcodes-c50edb0f71a2) 
+
+# 19 Alien Codex
+
+To complete the level it is necessary to understand [Layout of State Variables in Storage](https://docs.soliditylang.org/en/v0.4.25/miscellaneous.html#layout-of-state-variables-in-storage)
+
+# 20 Denial
+
+It is necessary to create a custom controct and set as partner contract. .call function is being used for transfer and doesn't have specified gas amount. Custom contract must use assert in order to consume all gas and fail transaction.
+
+# 21 Shop
+
+This level is similar to 11 Elevator. During first price() call it is necessary to return high value and during second call low value. It is a "view" function so calling contract can't change state but it is possible to monitor value of Shop(msg.sender).isSold()
+
+# 22 Dex
+
+Swap function gives the wrong price. Dex balance is decreasing afther each swap.
+Initial balance:
+Token1 - account balance: 10 dex balance: 100
+Token2 - account balance: 10 dex balance: 100
+Swap 1:
+Token1 - account balance: 0 dex balance: 110
+Token2 - account balance: 20 dex balance: 90
+Swap 3:
+Token1 - account balance: 24 dex balance: 86
+Token2 - account balance: 0 dex balance: 110
+
+# 23 Dex Two
+
+Create custom ERC20 and add liquidity. Use unlimited custom token to drain DEX.
