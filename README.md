@@ -1,10 +1,12 @@
 # Ethernaut solutions - brownie
 
-This is a repo with solutions in [Brownie](https://eth-brownie.readthedocs.io/en/stable/) to [Ethernaut CTF](https://ethernaut.openzeppelin.com/). In-depth explanations for each level are visible [solutions](https://github.com/PeterisPrieditis/ethernaut-brownie/tree/master/solutions) folder. A great list with solutions from other people can be found at [Ethernaut Community Solutions](https://forum.openzeppelin.com/t/ethernaut-community-solutions/561).
+This is a repo with Ethernaut solutions in [Brownie](https://eth-brownie.readthedocs.io/en/stable/) to [Ethernaut CTF](https://ethernaut.openzeppelin.com/). A great list with solutions from other people can be found at [Ethernaut Community Solutions](https://forum.openzeppelin.com/t/ethernaut-community-solutions/561).
 
 I was using:
 https://cmichel.io/ethernaut-solutions/
 https://forum.openzeppelin.com/t/ethernaut-community-solutions/561#nicole-zhu-series-3
+https://medium.com/@appsbylamby/ethernaut-24-puzzle-wallet-walkthrough-mastering-the-proxy-pattern-cc830dc364ce
+https://medium.com/@appsbylamby/ethernaut-25-motorbikewalkthrough-3e1feeee6a4c
 
 ## Prerequisites
 
@@ -63,4 +65,41 @@ Tests can be run by:
 brownie test --network rinkeby
 # to run a specific test locally
 brownie test -k test_00_hello_ethernaut --network rinkeby
+```
+
+# Solutions
+
+## Hello Ethernaut
+
+### Explanation
+
+This is introduction chalange in order to get familiar how to play the game.
+
+### Solution in console
+
+To solve challange in browser console it is necessary to write:
+```bash
+    await contract.info()
+    await contract.info1()
+    await contract.info2("hello")
+    await contract.infoNum()
+    await contract.theMethodName()
+    await contract.method7123949()
+    let password = await contract.password()
+    await contract.authenticate(password)
+```
+
+### Solution in Brownie
+
+Solution uses abi file from interface folder and not solidity code because at start of challange solidity code is not yet visible. We can get abi from console with:
+```bash
+JSON.stringify(ethernaut.abi)
+```
+
+To solve chalange in Brownie:
+```bash
+# to solve on the real Rinkeby network:
+brownie run scripts/_00_hello_ethernaut.py --network rinkeby-fork
+# to solve on a local Rinkeby network fork:
+brownie run scripts/_00_hello_ethernaut.py --network rinkeby
 ```
