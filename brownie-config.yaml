@@ -3,17 +3,20 @@
 # Started to use 10 Gwei as priority fee because of Rinkeby congestion
 # https://eth-brownie.readthedocs.io/en/stable/config.html 
 
+# old remaping
+# openzeppelin=OpenZeppelin/openzeppelin-contracts@3.0.0
+
 
 networks:
     live:
         priority_fee: 10000000000
 dependencies:
-  - OpenZeppelin/openzeppelin-contracts@3.0.0
+  - OpenZeppelin/openzeppelin-contracts@3.2.0
   - OpenZeppelin/openzeppelin-contracts@2.5.0
 compiler:
   solc:
     remappings:
-      - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@3.0.0'
+      - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@3.2.0'
       - '@openzeppelin-2.5.0=OpenZeppelin/openzeppelin-contracts@2.5.0'
 dotenv: .env
 wallets:
@@ -45,3 +48,4 @@ levels:
   21_shop:          '0xbe732789f2963e0522719f2d3fb55e6bfe07e92e'
   22_dex:           '0x0b0276f85ef92432fbd6529e169d9de4ad337b1f'
   23_dex_two:       '0xd2ba82c4777a8d619144d32a2314ee620bc9e09c'
+  24_puzzle_wallet: '0x440bcea590a77445c24ff623113978449351feb1'

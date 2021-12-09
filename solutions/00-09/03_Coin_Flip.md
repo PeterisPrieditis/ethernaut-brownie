@@ -138,3 +138,11 @@ Token2 - account balance: 0 dex balance: 110
 # 23 Dex Two
 
 Create custom ERC20 and add liquidity. Use unlimited custom token to drain DEX.
+
+# 23 Puzzle Wallet
+
+It is necessary to use storage collisions in order to solve this level:
+1) Become owner of PuzzleWallet by calling PuzzleProxy.proposeNewAdmin().
+2) We can add our address to white list because we are the PuzzleWallet owner.
+3) Create multicall to drain wallet.
+4) Use PuzzleWallet.setMaxBalance() to set PuzzleProxy.admin.
