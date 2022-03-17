@@ -2,11 +2,11 @@
 
 This is a repo with Ethernaut solutions in [Brownie](https://eth-brownie.readthedocs.io/en/stable/) to [Ethernaut CTF](https://ethernaut.openzeppelin.com/). A great list with solutions from other people can be found at [Ethernaut Community Solutions](https://forum.openzeppelin.com/t/ethernaut-community-solutions/561).
 
-I was using:
-https://cmichel.io/ethernaut-solutions/
-https://forum.openzeppelin.com/t/ethernaut-community-solutions/561#nicole-zhu-series-3
-https://medium.com/@appsbylamby/ethernaut-24-puzzle-wallet-walkthrough-mastering-the-proxy-pattern-cc830dc364ce
-https://medium.com/@appsbylamby/ethernaut-25-motorbikewalkthrough-3e1feeee6a4c
+I used:
+- https://cmichel.io/ethernaut-solutions/
+- https://forum.openzeppelin.com/t/ethernaut-community-solutions/561#nicole-zhu-series-3
+- https://medium.com/@appsbylamby/ethernaut-24-puzzle-wallet-walkthrough-mastering-the-proxy-pattern-cc830dc364ce
+- https://medium.com/@appsbylamby/ethernaut-25-motorbikewalkthrough-3e1feeee6a4c
 
 ## Prerequisites
 
